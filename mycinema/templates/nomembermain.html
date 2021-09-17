@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<style type="text/css">
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+a:link { color:black; }
+a:visited { color:black; }
+a:hover { color:red; }
+a:active { color:green; }  
+a { text-decoration:none; }
+#body1{
+background-color: beige;      
+}
+#login{
+text-align: right;
+color : white;
+}
+
+#table2{
+width: 980px; 
+height : 100%;
+}  
+#table3{
+width: 980px;
+}   
+#tr1{
+text-align: left; 
+}
+#td1{     
+text-align: center;     
+width: 35%;   
+} 
+#td2{ 
+text-align: left;
+font-size : 15px;
+font-weight : bold;    
+width: 10%;         
+}  
+#td3{  
+text-align: left;
+font-size : 15px;
+font-weight : bold;
+width: 10%;   
+
+   
+}  
+#td4{
+text-align: left;
+font-size : 15px;
+font-weight : bold; 
+width: 12%;
+ 
+         
+}
+#td5{ 
+text-align: left;
+font-size : 15px;
+font-weight : bold; 
+width: 33%;         
+  
+      
+}
+
+#wall2{
+text-align:center;
+width: 100%;     
+height: 100%;
+}
+ 
+#tom{  
+text-align:center;
+width: 980px;     
+height: 450px;    
+}
+#movieselection{ 
+text-align: center; 
+color: red;     
+}             
+#event{
+text-align: center; 
+color: red;       
+}
+#hr{
+border: solid 1px;  
+}    
+#introduce{
+size: 10px;   
+}
+#div1{
+text-align: right;
+}
+#button{
+text-align: center;
+padding: 10px 25px;
+background-color: red;
+color: white;
+border-width: 0px;
+}
+#button2{
+text-align: center;
+padding: 10px 25px;
+background-color: red;
+color: white;
+border-width: 0px;
+}
+#button3{
+text-align: center;
+padding: 10px 25px;
+background-color: black;
+color: white;
+border-width: 0px;
+}
+.event1{
+width : 242px;
+height : 204px;
+}
+.event2{
+width : 243px;
+height : 247px;
+}
+.event3{
+width : 487px;
+height : 247px;
+}
+</style>
+    <title>Hello, world!</title>
+  </head>
+  
+   
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!-- 네비게이션 바 -->
+<body class="pt-5">  
+  
+<nav id="nav1" class="navbar navbar-expand-lg navbar-dark nav bg-dark fixed-top" style="height: 90px;">
+   <div class="collapse navbar-collapse">
+      <a class="navbar-brand" href="#"><img src="../static/images/logo333.png" width="320"></a>
+      <ul class="nav navbar-nav"> 
+         <li class="nav-item">
+            <a class="nav-link" href="/movie"><h5> 영  화 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/ticketing"><h5> 예  매 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/mypage"><h5> 마 이 페 이 지 </h5>
+            <span class="sr-only">(current)</span></a></li>               
+         <li class="nav-item">
+            <a class="nav-link" href="/cs"><h5> 고 객 센 터 </h5></a></li>
+      </ul>
+   </div>
+   <div class="collapse navbar-collapse" id="navbarText">
+   <span class="navbar-text">Welcome to 3TEAM CINEMA</span>
+   </div>
+   <div id="login">비회원님 환영합니다 <a href="create"><a href="/"><button id="button3">logout</button></a><button id="button3">회원가입</button></a>
+   </div>
+</nav>
+</body>
+<body>
+<br>
+<center>
+<table id="table2">
+	<tr>
+		
+		<td id="wall2">		
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <a href="#">
+      		<img src="https://img.cgv.co.kr/banner/main/mainbig_new_1.jpg" class="d-block w-100" alt="...">
+    	</a>
+    </div>
+    <div class="carousel-item" data-interval="2000">
+      <a href="#"><img src="https://img.cgv.co.kr/Front/Main/2021/0623/16244092604450.jpg" class="d-block w-100" alt="...">
+    	</a>
+    </div>
+    <div class="carousel-item">
+      <a href="#"><img src="https://img.cgv.co.kr/Front/Main/2021/0618/16239787731570.jpg" class="d-block w-100" alt="...">
+    	</a>
+    </div>
+    <div class="carousel-item">
+      <a href="#"><img src="https://img.cgv.co.kr/Front/Main/2021/0617/16238925173630.jpg" class="d-block w-100" alt="...">
+    	</a>
+    </div>
+    <div class="carousel-item">
+      <a href="#"><img src="https://img.cgv.co.kr/Front/Main/2021/0614/16236349508780.jpg" class="d-block w-100" alt="...">
+    	</a>
+    </div>
+    <div class="carousel-item">
+      <a href="#"><img src="https://img.cgv.co.kr/Front/Main/2021/0616/16238212950140.jpg" class="d-block w-100" alt="...">
+    	</a>
+    </div>
+    <div class="carousel-item">
+      <a href="#"><img src="https://img.cgv.co.kr/Front/Main/2021/0616/16238212949680.jpg" class="d-block w-100" alt="...">
+    	</a>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</td>
+		 
+	</tr>
+</table>   
+       
+
+
+<div class="adreduce" id="adReduce">                    
+                    <iframe src="//ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/sub@TopBar_EX" width="100%" height="80" title="" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" name="TopBanner" id="TopBanner"></iframe>
+</div>                   
+<table id="table3">    
+	<tr>
+		<td colspan="4" id="movieselection"><h1>MOVIE SELECTION</h1></td>         
+	</tr>  
+	<tr>
+		<td colspan="3"><a href="http://h.vod.cgv.co.kr/vodCGVa/77466/77466_115876_1200_128_960_540.mp4"><img src="../static/images/movie1.jpg"></a></td> <!--movie selection 밑-->
+		<td><a href="#"><img src="../static/images/movie2.jpg"></a></td>
+	</tr>    
+		<td colspan="4"><hr id="hr"></td>
+	<tr>
+		<td><a href="#"><img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000084/84644/84644_320.jpg" class="event1"></a></td> <!--event 밑-->  
+		<td><a href="#"><img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000084/84643/84643_320.jpg" class="event1"></a></td>
+		<td><a href="#"><img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000084/84686/84686_320.jpg" class="event1"></a></td>
+		<td><a href="#"><img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000084/84727/84727_320.jpg" class="event1"></a></td>    
+	</tr>
+	<tr>
+		<td colspan="4"><hr id="hr"></td>      
+	</tr>
+	<tr>
+		<td><a href="#"><img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000083/83078/83078_320.jpg" class="event2"></a></td>
+		<td colspan="2"><a href="#"><img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000082/82986/82986_320.jpg" class="event3"></a></td>
+		<td><a href="#"><img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000084/84750/84750_320.jpg" class="event2"></a></td>
+	</tr>	  
+</table> 
+<hr>
+<div><a href="http://www.acornedu.co.kr/info/info.jsp"><font size="4px">회사소개</a></font>
+<font size="4px"> | </font>         
+<font size="4px"><a href="http://www.acornedu.co.kr/info/map_02.jsp">오시는길</a></font></div>    
+</center>  
+  </body>
+</html>

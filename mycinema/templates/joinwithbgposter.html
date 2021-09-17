@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+<!-- <link rel="stylesheet" href="/static/css/css_join.css">  -->
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<style type="text/css">
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+div.container { 
+        position: relative;
+        left: 110px;
+        height: 500px;
+      }
+.table table-hover {
+	width: 80%
+}
+.entirebody {
+	background-image:url("https://i.pinimg.com/originals/b5/69/b4/b569b40c4f778bad22350c3ec01c6bd6.jpg")
+}
+</style>
+<!-- 기타 배경화면 : https://a-static.besthdwallpaper.com/eobenjyeo-seu-endeu-geim-mabeul-byeogji-2048x1152-55320_49.jpg  https://cdn.hipwallpaper.com/i/96/86/qUjdG4.jpg -->
+
+<script type="text/javascript"> 
+window.onload = function(){
+	document.getElementById("btnJoin").onclick = confirmFunc;
+	document.getElementById("btnCheckId").onclick = checkidFunc;
+	document.getElementById("btnCheckTel").onclick = checktelFunc;
+}
+
+
+function checkidFunc(){  // ID 중복확인
+	if(joinFrm.newid.value === ""){
+		alert("아이디를 입력하세요");
+		joinFrm.newid.focus();
+		return;
+	}
+	let reg_id = /^[a-zA-Z0-9]{6,20}$/   // 아이디에 대한 정규표현식
+	if(!reg_id.test(joinFrm.newid.value)){
+		alert("아이디는 6 ~ 20 자리이어야 하며, 영문자 또는 숫자 조합이어야 합니다");
+		joinFrm.newid.focus();
+		return;
+	}else{  
+		url = "/idcheck?wanted_id=" + joinFrm.newid.value;	
+		window.open(url, "window 팝업", "toolbar=no, width=400, height=200, top=200, left=1400");
+	}
+}
+
+
+function checktelFunc(){  // 휴대폰 번호 중복확인
+	if(joinFrm.newtel.value === ""){
+		alert("휴대폰 번호를 입력하세요");
+		joinFrm.newtel.focus();
+		return;
+	}
+	let reg_tel = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;  // 전화번호에 대한 정규표현식
+	if(!reg_tel.test(joinFrm.newtel.value)){
+		alert("휴대폰 번호를 정확히 입력하세요('-' 필수)");
+		joinFrm.newtel.focus();
+		return;
+	}else{  
+		url = "/telcheck?wanted_tel=" + joinFrm.newtel.value;	
+		window.open(url, "window 팝업", "toolbar=no, width=400, height=200, top=200, left=1400");
+	}
+}
+
+
+function change_id(){
+	document.getElementById('useid').innerText = "";
+}
+
+function change_tel(){
+	document.getElementById('usetel').innerText = "";
+}
+
+
+function confirmFunc(){
+	if(joinFrm.newid.value === ""){
+		alert("아이디를 입력하세요");
+		joinFrm.newid.focus();
+		return;
+	}
+	let reg_id = /^[a-zA-Z0-9]{6,20}$/   // 아이디에 대한 정규표현식
+	if(!reg_id.test(joinFrm.newid.value)){
+		alert("아이디는 6 ~ 20 자리이어야 하며, 영문자 또는 숫자 조합이어야 합니다");
+		joinFrm.newid.focus();
+		return;
+	}
+	
+	let reg_pwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;  // 비밀번호에 대한 정규표현식
+	if(!reg_pwd.test(joinFrm.newpwd.value)){
+		alert("비밀번호는 8 ~ 15 자리이어야 하며, 영문자/숫자/특수문자 모두를 포함해야 합니다");
+		joinFrm.newpwd.focus();
+		return;
+	}
+	
+	if(joinFrm.newpwd2.value !== joinFrm.newpwd.value){
+		alert("비밀번호가 일치하지 않습니다");
+		joinFrm.newpwd2.focus();
+		return;
+	}
+	if(joinFrm.newname.value === ""){
+		alert("이름을 입력하세요");
+		joinFrm.newname.focus();
+		return;
+	}
+	
+	let reg_name = /^[가-힣]{2,5}$/;  // 이름에 대한 정규표현식
+	if(!reg_name.test(joinFrm.newname.value)){
+		alert("이름을 정확히 입력하세요");
+		joinFrm.newname.focus();
+		return;
+	}
+	if(joinFrm.newtel.value === ""){
+		alert("휴대폰 번호를 입력하세요");
+		joinFrm.newtel.focus();
+		return;
+	}
+	
+	let reg_tel = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;  // 전화번호에 대한 정규표현식
+	if(!reg_tel.test(joinFrm.newtel.value)){
+		alert("휴대폰 번호를 정확히 입력하세요('-' 필수)");
+		joinFrm.newtel.focus();
+		return;
+	}
+	if(joinFrm.yy.value === ""){
+		alert("법정생년월일을 입력하세요");
+		joinFrm.yy.focus();
+		return;
+	}
+	if(joinFrm.mm.value === "선택안함"){
+		alert("법정생년월일을 입력하세요");
+		joinFrm.mm.focus();
+		return;
+	}
+	if(joinFrm.dd.value === "선택안함"){
+		alert("법정생년월일을 입력하세요");
+		joinFrm.dd.focus();
+		return;
+	}
+	if(joinFrm.yy.value < 1900 || joinFrm.yy.value > 2021){
+		alert("법정생년월일을 정확히 입력하세요(4자)");
+		joinFrm.yy.focus();
+		return;
+	}
+	if(joinFrm.newjumin1.value === ""){
+		alert("주민등록번호를 입력하세요");
+		joinFrm.newjumin1.focus();
+		return;
+	}
+	if(joinFrm.newjumin2.value === ""){
+		alert("주민등록번호를 입력하세요");
+		joinFrm.newjumin2.focus();
+		return;
+	}
+	
+	let reg_jumin1 = /^[0-9]{6}$/;  // 주민등록번호에 대한 정규표현식
+	let reg_jumin2 = /^[1-2]{1}[0-9]{6}$/;
+	if(!reg_jumin1.test(joinFrm.newjumin1.value)){
+		alert("주민등록번호 앞자리를 정확히 입력하세요");
+		joinFrm.newjumin1.focus();
+		return;
+	}
+	if(!reg_jumin2.test(joinFrm.newjumin2.value)){
+		alert("주민등록번호 뒷자리를 정확히 입력하세요");
+		joinFrm.newjumin2.focus();
+		return;
+	}
+	if(joinFrm.newjumin1.value !== String(joinFrm.yy.value).substring(2,4) + joinFrm.mm.value + joinFrm.dd.value){  
+		alert("주민등록번호 앞자리와 법정생년월일이 일치하는지 확인하세요");
+		joinFrm.newjumin1.focus();
+		return;
+	}
+
+	if(document.getElementById("useid").innerText  !== "사용가능"){  // ID 중복체크 버튼에 대한 결과 반영
+		alert("ID 중복확인 버튼으로 사용 가능한 ID인지 확인하세요");
+		joinFrm.btnCheckId.focus();
+		return;
+	}
+	if(document.getElementById("usetel").innerText  !== "사용가능"){  // 휴대폰번호 중복체크 버튼에 대한 결과 반영
+		alert("휴대폰번호 중복확인 버튼으로 사용 가능한 휴대폰 번호인지 확인하세요");
+		joinFrm.btnCheckTel.focus();
+		return;
+	}
+	
+
+	joinFrm.submit();
+}
+	
+</script>
+
+</head>
+<body class="entirebody">
+<body class="pt-5">
+<nav id="nav1" class="navbar navbar-expand-lg navbar-dark nav bg-dark fixed-top" style="height: 90px;">
+	<div class="collapse navbar-collapse">
+		<a class="navbar-brand" href="/"><img src="/static/images/logo333.png" width="320"></a>  <!-- 로그인되지 않은 메인 요청명 확인 필요 -->
+		<ul class="nav navbar-nav"> 
+            <a class="nav-link" href="/movie"><h5> 영  화 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/ticketing"><h5> 예  매 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/mypage"><h5> 마 이 페 이 지 </h5>
+            <span class="sr-only">(current)</span></a></li>               
+         <li class="nav-item">
+            <a class="nav-link" href="/bmain"><h5> 고 객 센 터 </h5></a></li>
+      </ul>
+	</div>
+	<div class="collapse navbar-collapse" id="navbarText">
+		<span class="navbar-text">Welcome to 3TEAM CINEMA</span>
+	</div>
+</nav>
+</body>
+<br><br><br><br><br>
+
+
+<body>
+<div class="container">
+
+
+<h3 style="font-weight:bold;color:black;">Complete the below form to Sign Up !</h3><br>
+<h5 style="font-weight:bold;color:black;">for your best cinema experience</h5>
+<form action="/joinok" method="post" name="joinFrm" class="w-75" onsubmit="return false">{% csrf_token %}  <!-- onsubmit="return false" : form의 enter 막기 -->
+<table id="table1" border="1" class="table table-hover" style="background-color:white;opacity:0.85;"> 
+	<tr class="thead-dark"><th colspan="6">기본정보(* 필수)</th></tr>
+	<tr>
+		<td><b>아이디*</b></td>
+		<td colspan="5">
+			<input type="text" name="newid" id="newid" size="30" onchange="change_id()" placeholder="6 ~ 20자리 영문자 또는 숫자 조합">
+			<input type="button" id="btnCheckId" class="btn-outline-danger" value="중복 확인">
+			<span name="useid" id="useid" style="color:red"></span>  <!-- ID 중복확인버튼 클릭시 넘어올 msg 받는다 -->
+		</td>
+	</tr>
+	<tr>
+		<td><b>비밀번호*</b></td>
+		<td colspan="5">
+			<input type="text" name="newpwd" id="newpwd" maxlength="15" size="30" placeholder="8 ~ 15자리 영문자+숫자+특수문자 조합">
+		</td>
+	</tr>
+	<tr>
+		<td><b>비밀번호 확인*</b></td>
+		<td colspan="5">
+			<input type="password" name="newpwd2" id="newpwd2" size="30">
+		</td>
+	</tr>
+	<tr>
+		<td><b>이름*</b></td>
+		<td colspan="5">
+			<input type="text" name="newname" id="newname" size="30" >
+		</td>
+	</tr>
+	<tr>
+		<td><b>휴대폰 번호*</b></td>
+		<td colspan="5">
+			<input type="text" name="newtel" id="newtel" onchange="change_tel()" placeholder="'-'와 함께 휴대폰 번호 입력" maxlength="13" size="30">
+			<input type="button" id="btnCheckTel" class="btn-outline-danger" value="중복 확인">
+			<span name="usetel" id="usetel" style="color:red"></span>  <!-- 휴대폰번호 중복확인버튼 클릭시 넘어올 msg 받는다 -->
+		</td>
+	</tr>
+	<tr>
+		<td><b>법정생년월일*</b></td>
+		<td colspan="5">
+			<input type="number" min="1900" max="2021" name="yy" id="yy" placeholder="년(4자)" style="width:105px">&nbsp;
+			<select name="mm" id="mm" style="width:55px;height:28px;">
+				<option value="선택안함">월</option>
+				<option value="01">1</option>
+				<option value="02">2</option>
+				<option value="03">3</option>
+				<option value="04">4</option>
+				<option value="05">5</option>
+				<option value="06">6</option>
+				<option value="07">7</option>
+				<option value="08">8</option>
+				<option value="09">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+			</select>&nbsp;
+			<select name="dd" id="dd" style="width:55px;height:28px;">
+				<option value="선택안함">일</option>
+				<option value="01">1</option>
+				<option value="02">2</option>
+				<option value="03">3</option>
+				<option value="04">4</option>
+				<option value="05">5</option>
+				<option value="06">6</option>
+				<option value="07">7</option>
+				<option value="08">8</option>
+				<option value="09">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				<option value="24">24</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28">28</option>
+				<option value="29">29</option>
+				<option value="30">30</option>
+				<option value="31">31</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td><b>주민등록번호*</b></td>
+		<td colspan="5">
+			<input type="text" name="newjumin1" id="newjumin1" maxlength="6" size="10">
+			-&nbsp;<input type="password" name="newjumin2" id="newjumin2" maxlength="7" size="10">
+		</td>
+	</tr>
+</table>
+
+<br>
+
+<table id="table2" border="1" class="table table-hover" style="background-color:white;opacity:0.85;"> 
+	<tr class="thead-dark"><th colspan="6">추가정보</th></tr>
+	<tr>
+		<td><b>성별 (선택)</b></td>
+		<td colspan="5">
+			&nbsp;&nbsp;&nbsp;<input type="radio" name="gen" value="선택안함" checked> 선택 안함&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="gen" value="남"> 남성&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="gen" value="여"> 여성
+		</td>
+	</tr>
+	<tr>
+		<td><b>선호 영화 장르(중복 선택 가능)</b></td>
+		<td colspan="5"> <!-- checkbox : 0개 이상의 선택 가능(복수개 가능) --> <!-- td 안에 table --> <!-- 네이버 영화 디렉토리 기준 -->
+		<table>
+				<tr>
+					<td><input type="checkbox" name="like_genre" id="drama" value="드라마"> 드라마</td>
+					<td><input type="checkbox" name="like_genre" id="fantasy" value="판타지"> 판타지</td>
+					<td><input type="checkbox" name="like_genre" id="western" value="서부"> 서부</td>
+					<td><input type="checkbox" name="like_genre" id="horror" value="공포"> 공포</td>
+					<td><input type="checkbox" name="like_genre" id="romance" value="로맨스"> 로맨스</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="like_genre" id="adventure" value="모험"> 모험</td>
+					<td><input type="checkbox" name="like_genre" id="thriller" value="스릴러"> 스릴러</td>
+					<td><input type="checkbox" name="like_genre" id="noir" value="느와르"> 느와르</td>
+					<td><input type="checkbox" name="like_genre" id="cult" value="컬트"> 컬트</td>
+					<td><input type="checkbox" name="like_genre" id="documentary" value="다큐멘터리"> 다큐멘터리</td>
+					
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="like_genre" id="comedy" value="코미디"> 코미디</td>
+					<td><input type="checkbox" name="like_genre" id="family" value="가족"> 가족</td>
+					<td><input type="checkbox" name="like_genre" id="mystery" value="미스터리"> 미스터리</td>
+					<td><input type="checkbox" name="like_genre" id="war" value="전쟁"> 전쟁</td>
+					<td><input type="checkbox" name="like_genre" id="animation" value="애니메이션"> 애니메이션</td>
+					
+				</tr>
+				<tr>	
+					<td><input type="checkbox" name="like_genre" id="crime" value="범죄"> 범죄</td>
+					<td><input type="checkbox" name="like_genre" id="musical" value="뮤지컬"> 뮤지컬</td>
+					<td><input type="checkbox" name="like_genre" id="scifi" value="SF"> SF</td>
+					<td><input type="checkbox" name="like_genre" id="action" value="액션"> 액션</td>
+					<td><input type="checkbox" name="like_genre" id="blackcomedy" value="블랙코미디"> 블랙코미디</td>
+					
+					
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="like_genre" id="19+" value="에로"> 에로</td>	
+					<td><input type="checkbox" name="like_genre" id="suspense" value="서스펜스"> 서스펜스</td>
+					<td><input type="checkbox" name="like_genre" id="epic" value="서사"> 서사</td>
+					<td><input type="checkbox" name="like_genre" id="martial" value="무협"> 무협</td>
+					<td><input type="checkbox" name="like_genre" id="liveperformance" value="공연실황"> 공연실황</td>
+					<td><input type="checkbox" name="like_genre" id="experimental" value="실험"> 실험</td>
+				</tr>
+				</table>
+		</td>
+	</tr>
+</table>
+
+<br>
+<input type="button" id="btnJoin" class="btn-danger" value="가 입 하 기" style="width:100%;height:70px;font-size:30px">
+</form>
+
+<br><br><br>
+<div class="w-75" style="text-align:center;color:red;">
+<a href="/">3TEAM</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/cs">고객센터</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.acornedu.co.kr/info/info.jsp">회사소개</a>
+
+<div>Copyright &copy; 3TEAM Corp. All rights reserved</div>
+</div> <!-- div class="w-75" -->
+</div> <!-- div class="container" -->
+
+</body>
+</body>  <!-- body class="entirebody" -->
+</html>

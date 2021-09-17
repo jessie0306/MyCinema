@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title> 3TEAM CINEMA </title>
+
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+/* 영화관 지역에 따른 영화관 리스트 표출 */
+function LocClick(clicked){
+	//alert(clicked);
+	//alert(clicked.parentNode.childNodes[3];
+	
+	const cineActive = document.querySelectorAll(".cine-loc-selected");
+	cineActive.forEach((list) => {
+		list.classList.remove("cine-loc-selected");   //선택되지 않은 지역 태그의 선택 클래스 삭제
+		list.parentNode.childNodes[3].style.display = "none";  //영화관 보이지 않게
+	});
+	
+	clicked.classList.add("cine-loc-selected");  //클릭된 지역 태그에 선택 클래스 부여
+	clicked.parentNode.childNodes[3].style.display = "block";  //영화관 보이기
+
+};
+
+
+/* 영화관에 따라 상영중인 영화리스트 표출 */
+function cineClick(clicked){
+	$(".movie-list").empty();          //영화리스트 clear
+	let selected_cine = clicked.text;  //선택된 영화관 변수로 저장
+	
+	//클래스 속성 변경
+	const cineActive = document.querySelectorAll(".cine-selected");
+	cineActive.forEach((list) => {
+		list.classList.remove("cine-selected");
+	})
+	clicked.classList.add("cine-selected");
+	
+	//영화 데이터 가져오기
+	let movieSet = new Set();  //중복제거를 위해 set 사용
+	let str = "<ul>"
+	$.ajax({
+		url:"calldb",      //장고로 url 요청
+		type:"post", 
+		dataType:"json",
+		success:function(data){  
+			//alert(data);
+			//선택한 영화관에서 상영하는 영화만 추출 
+			$.each(data, function(ind, content){
+				if (content["cine_name"] == selected_cine){  
+					movieSet.add(content["movie_name"])
+				};
+			});
+			movie_list = Array.from(movieSet);  //배열로 저장
+			
+			//태그 설정 문자열로 합치기
+			for(i=0; i < movie_list.length; i++){  
+				str += "<li>" + "<a class='movie-btn'" + "href='#'" + "onclick='movieClick(this)'>" + movie_list[i] + "</a>" + "</li>"
+			}
+			str += "</ul>"
+			
+			$(".movie-list").append(str)  //영화리스트 보여주기
+				
+		},
+		error:function(){
+			$(".movie-list").text("에러")
+		}
+	});
+	
+};
+
+
+/* 영화 선택하면 날짜리스트 표출 */
+function movieClick(clicked){
+	$(".date-list").empty();  //날짜리스트 clear
+	
+	//선택된 정보 변수로 저장
+	let selected_movie = clicked.text;  
+	let selected_cine = document.querySelector(".cine-selected").text;
+	//alert(selected_cine)
+	
+	//클래스 속성 변경
+	const cineActive = document.querySelectorAll(".movie-selected");
+	cineActive.forEach((list) => {
+		list.classList.remove("movie-selected");
+	})
+	clicked.classList.add("movie-selected");
+
+	//날짜 데이터 가져오기
+	let dateSet = new Set()
+	let str = "<ul>"
+	$.ajax({
+		url:"calldb",      //장고로 url 요청
+		type:"post", 
+		dataType:"json",
+		success:function(data){  
+			//alert(data);
+			$.each(data, function(ind, content){
+				if (content["cine_name"] == selected_cine && content["movie_name"] == selected_movie){  
+					dateSet.add(content['movie_date']);
+				};
+			});
+			date_list = Array.from(dateSet);  //배열로 저장
+			
+			for(i=0; i < date_list.length; i++){  
+				str += "<li>" + "<a href=# class='date-btn'" + " onclick='dateClick(this)'>" + date_list[i] + "</a>" + "</li>"
+			}
+			str += "</ul>"
+		
+			$(".date-list").append(str)
+				
+		},
+		error:function(){
+			$(".date-list").text("에러")
+		}
+	});
+};
+
+/* 날짜 선택하면 시간 리스트 표출 */
+function dateClick(clicked){
+	$(".time-list").empty();  //시간리스트 clear
+	//alert(clicked);
+	
+	//선택된 정보 변수로 저장
+	let selected_date = clicked.text  
+	let selected_cine = document.querySelector(".cine-selected").text;
+	let selected_movie = document.querySelector(".movie-selected").text;
+	//alert(selected_date)
+
+	const cineActive = document.querySelectorAll(".date-selected");
+	cineActive.forEach((list) => {
+		list.classList.remove("date-selected");
+	})
+	clicked.classList.add("date-selected");
+	
+	//시간 데이터 가져오기
+	let str = "<ul>"
+	let movie_id = ""
+	$.ajax({
+		url:"calldb",      //장고로 url 요청
+		type:"post", 
+		dataType:"json",
+		success:function(data){  
+			//alert(data);
+			//선택한 영화관에서 상영하는 영화만 추출 
+			$.each(data, function(ind, content){
+				if (content["cine_name"] == selected_cine && 
+						content["movie_name"] == selected_movie && content['movie_date'] == selected_date){  
+					str += "<li>" + "<a href=# class='time-btn'" + " onclick='timeClick(this)'>" + content['house_num'] + "&ensp;" + content['movie_time'] + "</a>" + "</li>"
+					movie_id = "<input class='movie_id' type='hidden' value=" + content['movie_id'] + ">"
+				};
+			});
+			
+			str += "</ul>"
+			$(".time-list").append(str)
+			$(".time-list").append(movie_id)
+			//alert(movie_id)
+				
+		},
+		error:function(){
+			$(".time-list").text("에러")
+		}
+	});
+	
+};
+
+/* 시간 선택 */
+function timeClick(clicked){
+	//클래스 속성 변경
+	const cineActive = document.querySelectorAll(".time-selected");
+	cineActive.forEach((list) => {
+		list.classList.remove("time-selected");
+	});
+	clicked.classList.add("time-selected");
+};
+
+/* 좌석선택으로 이동 */
+function nextFunc(){
+	
+	let ticketInform = {}
+	try {
+		ticketInform['cine'] = document.querySelector(".cine-selected").text;
+		ticketInform['movie_name'] = document.querySelector(".movie-selected").text;
+		ticketInform['movie_id'] = document.querySelector(".movie_id").value;
+		ticketInform['date'] = document.querySelector(".date-selected").text;
+		ticketInform['time'] = document.querySelector(".time-selected").text;
+		//alert(ticketInform['movie_id']);
+		//console.log(ticketInform)
+	} catch (err) {
+		alert('예매정보를 정확히 선택해주세요.');
+	}
+	
+	$.ajax({
+		url:"ticketCheck",      //장고로 url 요청
+		type:"post", 
+		dataType:"json",
+		data:ticketInform,
+		success:function(){  
+			alert('좌석선택 화면으로 이동합니다.');
+			location.href="goSeating";
+				
+		},
+		error:function(){
+
+		}
+	});
+	
+}
+
+</script>
+
+<style>
+/* 폰트설정 */
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal; 
+}
+
+
+/* content */
+ul{
+   list-style:none;
+}
+
+.container {
+    margin-top: 70px;
+}
+
+.separate-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    height: 600px;
+    /* border: 1px solid #dddddd; */
+}
+
+.separate-container>div {
+    border: 1px solid #dddddd;
+}
+
+.reserve-title {
+    border-bottom: 1px solid #dddddd;
+    background-color: rgb(40, 40, 40);
+    text-align: center;
+    color: #dddddd;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 링크 버튼 */
+.cine-item {
+	display: none;
+	font-size: 18px;
+	width: 260px;
+}
+
+.cine-loc-selected {
+	font-weight: bold;
+}
+
+.cine-btn {
+	color: #343a40;
+}
+
+a.cine-btn:hover {
+	color: #121416 !important;
+	background-color: #333333;
+}
+
+.movie-btn {
+	color: #343a40;
+}
+
+a.movie-btn:hover {
+	color: #121416 !important;
+	background-color: #333333;
+}
+
+.date-btn {
+	color: #343a40;
+}
+
+a.date-btn:hover {
+	color: #121416 !important;
+	background-color: #333333;
+}
+
+.time-btn {
+	color: #343a40;
+}
+
+a.time-btn:hover {
+	color: #121416 !important;
+	background-color: #333333;
+}
+
+.nextBtnArea {
+  top: 10px;
+  left: 1100px;
+  position: relative;
+  margin-bottom: 80px;
+} 
+
+.nextBtn {
+	 width: 100px;
+	 height: 100px;
+	 font-size: 20px;
+} 
+
+
+/* 선택된 정보 */
+.cine-selected {
+   background-color: #333333;
+   color: #fff !important;
+   border: 1px;
+   padding: 3px 3px 3px 3px;
+   font-size: 20px;
+}
+
+.movie-selected {
+   background-color: #333333;
+   color: #fff !important;
+   border: 1px;
+   padding: 3px 3px 3px 3px;
+   font-size: 20px;
+}
+
+.date-selected {
+   background-color: #333333;
+   color: #fff !important;
+   border: 1px;
+   padding: 3px 3px 3px 3px;
+   font-size: 20px;
+}
+
+.time-selected {
+   background-color: #333333;
+   color: #fff !important;
+   border: 1px;
+   padding: 3px 3px 3px 3px;
+   font-size: 20px;
+}
+.contents {
+	margin-top: 15px;
+	font-size: 18px;
+    width: 264px;
+}
+
+.movie-part {
+    width: 350px;
+}
+
+.theater-part {
+    width: 350px;
+}
+
+.date-part {
+    width: 200px;
+}
+
+.time-part {
+    width: 170px;
+}
+
+.movie-list {
+	font-size: 18px;
+}
+
+.sort-wrapper {
+    margin: 10px 6px 6px 10px;
+    /* padding: 3px; */
+    display: flex;
+    border-bottom: 1px solid #dddddd;
+    font-size: 12px;
+}
+
+.sort-wrapper>div {
+    padding: 3px;
+    font-weight: bold;
+    font-size: 14px; 
+    border-bottom: 1px solid #111111;
+    margin-left: 6px;
+}
+
+.sort-wrapper>div:hover {
+    border-bottom: 1px solid #111111;
+}
+
+
+</style>
+</head>
+
+<!-- 네비게이션 바 -->
+<body class="pt-5">
+<nav id="nav1" class="navbar navbar-expand-lg navbar-dark nav bg-dark fixed-top" style="height: 90px;">
+	<div class="collapse navbar-collapse">
+		<a class="navbar-brand" href="aftermain2"><img src="/static/images/logo333.png" width="320"></a>
+		<span> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; </span>
+		<ul class="nav navbar-nav" style="margin-top: 10px"> 
+			<li class="nav-item">
+				<a class="nav-link" href="movie"><h5> 영  화 </h5></a></li>
+			<li class="nav-item active">
+				<a class="nav-link" href="ticketing"><h5> 예  매 </h5></a></li>
+			<li class="nav-item">
+				<a class="nav-link" href="mypage"><h5> 마 이 페 이 지 </h5>
+				<span class="sr-only">(current)</span></a></li>					
+			<li class="nav-item">
+				<a class="nav-link" href="/bmain"><h5> 고 객 센 터 </h5></a></li>
+		</ul>
+	</div>
+	<div class="collapse navbar-collapse" id="navbarText">
+	<ul class="nav navbar-nav">
+		<li class="nav-item"><a class="nav-link" href="logout"><h5> 로그아웃 </h5></a></li>
+	</ul>
+	</div>
+</nav>
+</body>
+
+<body>
+<div class="container">
+<div class="separate-container">
+    <div class="theater-part">
+        <div class="reserve-title">극장</div>
+        <div class="contents">
+        <ul>
+        	<li>
+           		<a class="text-dark cine-loc-selected" href="#" onclick="LocClick(this);"><span>서울</span></a>
+            	<div class="cine-item">
+            	<ul>
+            		{% if cine_seoul %}
+            		{% for s in cine_seoul %}
+            		<li><a class="cine-btn" href="#" onclick="cineClick(this)">{{s.cine_name}}</a></li>
+            		{% endfor %}
+            		{% endif %}
+            	</ul>
+            	</div>
+            </li>
+            <li>
+            	<a class="text-dark" href="#" onclick="LocClick(this);"><span>경기</span></a>
+            	<div class="cine-item">
+            	<ul>
+            		{% if cine_gyeonggi %}
+            		{% for gg in cine_gyeonggi %}
+            		<li><a class="cine-btn" href="#" onclick="cineClick(this)">{{gg.cine_name}}</a></li>
+            		{% endfor %}
+            		{% endif %}
+            	</ul>
+            	</div>
+            </li>
+           	<li>
+           		<a class="text-dark" href="#" onclick="LocClick(this);"><span>대구</span></a>
+            	<div class="cine-item">
+            	<ul>
+            		{% if cine_daegu %}
+            		{% for d in cine_daegu %}
+            		<li><a class="cine-btn" href="#" onclick="cineClick(this)">{{d.cine_name}}</a></li>
+            		{% endfor %}
+            		{% endif %}
+            	</ul>
+            	</div>
+            <li>
+            	<a class="text-dark" href="#" onclick="LocClick(this);"><span>부산</span></a>
+            	<div class="cine-item">
+            	<ul>
+            		{% if cine_busan %}
+            		{% for b in cine_busan %}
+            		<li><a class="cine-btn" href="#" onclick="cineClick(this)">{{b.cine_name}}</a></li>
+            		{% endfor %}
+            		{% endif %}
+            	</ul>
+            	</div>
+            </li>
+           	<li>
+           		<a class="text-dark" href="#" onclick="LocClick(this);"><span>강원</span></a>
+           		<div class="cine-item">
+            	<ul>
+            		{% if cine_gangwon %}
+            		{% for gw in cine_gangwon %}
+            		<li><a class="cine-btn" href="#" onclick="cineClick(this)">{{gw.cine_name}}</a></li>
+            		{% endfor %}
+            		{% endif %}
+            	</ul>
+            	</div>
+            </li>
+            <li>
+            	<a class="text-dark" href="#" onclick="LocClick(this);"><span>인천</span></a>
+            	<div class="cine-item">
+           		<ul>
+           			{% if cine_incheon %}
+            		{% for i in cine_incheon %}
+           			<li><a class="cine-btn" href="#" onclick="cineClick(this)">{{i.cine_name}}</a></li>
+           			{% endfor %}
+           			{% endif %}
+           		</ul>
+           		</div>
+           	</li>
+           	<li>
+           		<a class="text-dark" href="#" onclick="LocClick(this);"><span>전라</span></a>
+           		<div class="cine-item">
+           		<ul>
+           			{% if cine_jeolla %}
+           			{% for jl in cine_jeolla %}
+            		<li><a class="cine-btn" href="#" onclick="cineClick(this)">{{jl.cine_name}}</a></li>
+            		{% endfor %}
+           			{% endif %}
+           		</ul>
+           		</div>
+           	</li>
+           	<li>
+           		<a class="text-dark" href="#" onclick="LocClick(this);"><span>제주</span></a>
+           		<div class="cine-item">
+           		<ul>
+           			{% if cine_jeju %}
+           			{% for jj in cine_jeju %}
+           			<li><a class="cine-btn" href="#" onclick="cineClick(this)">{{jj.cine_name}}</a></li>
+           			{% endfor %}
+           			{% endif %}
+           		</ul>
+           		</div>
+           	</li>
+           </ul>
+           </div>
+       </div>
+    <div class="movie-part">
+        <div class="reserve-title">영화</div>
+        <div class="sort-wrapper"><div>상영중인 영화</div></div>
+       		<div class="movie-list">
+       		</div>
+    </div>
+
+    <div class="date-part">
+        <div class="reserve-title">날짜</div>
+        <div class="contents">
+        	<div class="date-list">
+        
+        	</div>
+        </div>
+    </div>
+
+        <div class="time-part">
+		<div class="reserve-title">시간</div>
+		<div class="contents">
+       		<div class="time-list">
+       		
+      		</div>
+      	</div>
+        </div>
+</div>
+</div>
+
+<div class="nextBtnArea"><button class="nextBtn btn btn-danger" onclick="nextFunc()">좌석선택</button></div>
+
+</body>
+
+</html>

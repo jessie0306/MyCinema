@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<script src="/static/js/jquery-3.6.0.min"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<style type="text/css">
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#login{
+text-align: right;
+color : white;
+}
+
+#button{
+text-align: center;
+padding: 10px 25px;
+background-color: red;
+color: white;
+border-width: 0px;
+}
+
+#button2{
+text-align: center;
+padding: 10px 25px;
+background-color: black;
+color: white;
+border-width: 0px;
+}
+#button3{
+text-align: center;
+padding: 10px 25px;
+background-color: black;
+color: white;
+border-width: 0px;
+}
+
+#button{
+text-align: center;
+padding: 10px 25px;
+background-color: red;
+color: white;
+border-width: 0px;
+}
+
+#button2{
+text-align: center;
+padding: 10px 25px;
+background-color: black;
+color: white;
+border-width: 0px;
+}
+
+
+ul{
+            list-style: none;
+ 
+                    }
+.linemap-wrap {
+    width: 100%;
+    background-color: #f1f0e5;
+    border-bottom: 1px solid #cacac0;
+}
+
+.bg-dark {
+    background-color: #343a40!important;
+}
+
+.sidebar-sticky {
+    position: sticky;
+    top: 48px;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+strong {
+    font-weight: 500;
+}
+.talk_inquiry {
+    background: #ede9dd url(http://img.cgv.co.kr/R2014/images/sub/customer/ico_search.png) center 50px scroll no-repeat;
+    background-size: 50px;
+}
+
+.nav-link{
+color: #ffffff80;
+}
+</style>
+<title>board_main</title>
+</head>
+
+<body class="pt-5">
+<!-- 광고 뺌 -->
+<nav id="nav1" class="navbar navbar-expand-lg navbar-dark nav bg-dark fixed-top" style="height: 90px;">
+   <div class="collapse navbar-collapse">
+      <a class="navbar-brand" href="/"><img src="/static/images/logo333.png" width="320"></a>
+      <ul class="nav navbar-nav"> 
+         <li class="nav-item">
+            <a class="nav-link" href="/movie"><h5> 영  화 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/ticketing"><h5> 예  매 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/mypage"><h5> 마 이 페 이 지 </h5>
+            <span class="sr-only">(current)</span></a></li>               
+         <li class="nav-item active">
+            <a class="nav-link" href="/bmain"><h5> 고 객 센 터 </h5></a></li>
+      </ul>
+   </div>
+   <div class="collapse navbar-collapse" id="navbarText">
+   <span class="navbar-text">Welcome to 3TEAM CINEMA</span>
+   </div>
+   <div id="login">{{id}}님 환영합니다  <a href="logout"><button id="button3">logout</button></a>  <a href="join"><button id="button2">회원가입</button></a>
+</nav>
+</body>
+<body onload="rotate()" id="body1">
+<div class="bg-dark" ><br><br></div>
+<!-- 광고 -->
+<div class="bg-dark" id="adReduce">                    
+      <iframe src="//ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/sub@TopBar_EX" width="100%" height="80" title="" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" name="TopBanner" id="TopBanner"></iframe>
+</div>   
+<!-- /광고 -->
+<!-- home 줄 -->
+ <div id="ctl00_navigation_line" class="linemap-wrap">
+            <div class="sect-linemap">
+                <div class="sect-bcrumb">
+                    <ul >
+                        <li >
+                        <a href="/">
+                        	<img alt="home" src="https://img.cgv.co.kr/R2014/images/common/btn/btn_home.png" />
+                        </a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+<!-- / home 줄 -->
+<!-- content 부분 -->
+<div class = "content">
+
+<div class="container-fluid" >
+   <div class="row align-items-center " >
+<!-- side bar -->   
+   <div class="col-sm-2">
+     <nav class="navbar navbar-expand-lg navbar-dark nav bg-dark ">
+       <div class="collapse navbar-collapse ">
+       <div class="sidebar-sticky container-fluid">
+         <ul class="nav navbar-nav flex-column">
+           <li class="nav-item active">
+             <a class="nav-link" href="/bmain">
+               <h5>고객센터 메인</h5>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link" href="/Voc">
+               <h5>고객의 소리</h5>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link" href="/MMR">
+               <h5>내 영화 추천</h5>
+             </a>
+           </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+   
+   
+   </div>
+   	<!-- /sidebar -->
+   <br><br><br>
+   <hr>
+   <!-- 내용-->
+         <div class="col-sm-10">
+         <div class="jumbotron jumbotron-fluid  col-md-10">
+  <div class="container ">
+    <h1 class="display-4">Hello, how can I help you?</h1>
+    <br>
+    <p class="lead">3team cinema에서는 고객의 만족을 최우선으로 항상 눈과 귀가 열려있습니다. <br> 현재 코로나 소독을 위한 방역을 하루에 실시하여, 안전한 관람이 가능합니다.</p>
+  </div>
+</div>
+<hr>
+   <div class = "row container-fluid">
+
+ <div class="col-md-1 .offset-md-3"></div>
+          <div class="col-md-3 .offset-md-3">
+            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+            <h2>고객의 소리</h2>
+            <p>문의, 칭찬, 불만, 제안 등 다양한 의견을 보내주세요 ! <br>< 분실물 문의 / 대관 서비스안내 ></p>
+            <p><a class="btn btn-secondary" href="/Voc" role="button">바로가기 &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+ <div class="col-md-1 .offset-md-3"></div>
+          <div class="col-md-3 .offset-md-3">
+            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+            <h2>내 영화 추천</h2>
+            <p>내 인생영화! 내 추억의 영화! 최근에 재밌게 봤던 영화! 상관없이 장르별로 편하게 올려주세요</p>
+            <p><a class="btn btn-secondary" href="/MMR" role="button">바로가기 &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+
+
+</div>
+</div><!-- 내용 -->
+  </div><!-- /.row -->
+ </div><!-- /container-fluid -->
+</div><!-- /content -->
+</body>
+</html>

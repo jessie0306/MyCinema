@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+#button1{
+text-align: right;
+padding: 15px 65px;
+background-color: black;
+color: white;
+border-width: 0px;
+}
+#button2{
+text-align: right;
+padding: 15px 65px;
+background-color: black;
+color: white;
+border-width: 0px;
+}
+#table1{
+border : solid black;
+height : 800px;
+width : 500px;
+}
+#div1{
+font-size : 1.5em;
+text-align : center;
+}
+#img1{
+width : 100%;
+height : 100%;
+}
+
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+  
+<center>
+<h2>예매한 비회원 아이디 입니다.</h2>
+{% if all %}
+	{% for a in all %}
+<table id="table1" border="1">
+<tr>
+	<td colspan="2">
+	<div id="div1">티켓정보</div>
+	</td>
+</tr>
+<tr>
+	<td>
+	영화이름
+	</td>
+	<td>
+	{{a.movie_name}}
+	</td>
+</tr>
+	
+<tr>
+	<td>
+	포스터
+	</td>
+	<td>
+	<img src="../static/images/{{a.movie_id}}.png" id="img1"> <!--이미지는 숫자만 이동, 그리고 images에서 불러오기-->
+	</td>
+</tr>
+<tr>
+	<td>
+	영화관이름
+	</td>
+	<td>
+	{{a.cine_name}}
+	</td>
+</tr>
+<tr>
+	<td>
+	좌석
+	</td>
+	<td>
+	{{a.seat}}
+	</td>
+</tr>
+<tr>
+	<td>
+	날짜
+	</td>
+	<td>
+	{{a.ticket_date}}
+	</td>
+</tr>
+	{% endfor %}
+
+</table>
+{% else %}
+<div id="div2">예매한 티켓 정보가 없습니다.</div>
+{% endif %}
+<br><div><a href="ticketingcancel"><button id="button2">예매취소</button></a> <a href="/"><button id="button1">메인페이지로</button></a> </div>
+</center>
+
+</body>
+</html>

@@ -1,0 +1,412 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	<script src="/static/js/bootstrap.min.js"></script>     
+	<title>[크루엘라]</title>  
+	<script type="text/javascript" src="https://img.cgv.co.kr/R2014/js/amcharts.js"></script>
+	<script type="text/javascript" src="https://img.cgv.co.kr/R2014/js/radar.js"></script>
+
+<style>
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+div.container { 
+   margin-top: 100px;
+   margin-bottom: 100px;
+    position: relative;
+    left: 160px;
+    height: 500px;
+    }
+      
+div.movie-story {
+   margin-top: 50px;
+   position: relative;
+   left: 30px;
+   }
+   
+div.trailer {
+   margin-top: 50px;
+}
+img.trailer1{
+   width: 250px;
+   height: 150px;
+}
+img.trailer2{
+   width: 250px;
+   height: 150px;
+}
+img.trailer3{
+   width: 250px;
+   height: 150px;
+}
+ 
+  div.stillcut {
+   margin-top: 50px;
+   position: relative;
+}
+img.stillcutimage{
+   position: relative;
+   width: 350px;
+   height: 200px;
+   left: 50px;
+}
+div.charming-point {
+   margin-top: 50px;
+}
+
+div.emotion-point {
+   margin-top: 50px;
+}
+
+div.radar-graph {
+   position: relative;
+   left: 200px;
+}
+
+div.title {
+   background-color: #FFF1C1;
+   padding: 10px 10px 10px 25px;
+}
+.btn-danger{
+   text-align: center;
+   position:center;
+   width:30%;
+   margin: auto;
+
+}
+
+#button1{
+   text-align: center;
+   padding: 10px 25px;
+   background-color: black;
+   color: white;
+   border-width: 0px;
+}
+
+#button2{
+   text-align: center;
+   padding: 10px 25px;
+   background-color: black;
+   color: white;
+   border-width: 0px;
+}
+
+</style>
+
+
+</head>
+<!-- 네비게이션 바 -->
+<body class="pt-5">  <!-- 이미지 경로에 로고이미지 저장해주세요 여기에 -> static/images/logo333.png -->
+<nav id="nav1" class="navbar navbar-expand-lg navbar-dark nav bg-dark fixed-top" style="height: 90px;">
+   <div class="collapse navbar-collapse">
+      <a class="navbar-brand" href="/"><img src="static/images/logo333.png" style= "width: 320"></a>
+      <ul class="nav navbar-nav" style="margin-top: 10px"> 
+         <li class="nav-item  active">
+            <a class="nav-link" href="/movie"><h5> 영  화 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/ticketing"><h5> 예  매 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/mypage"><h5> 마 이 페 이 지 </h5>
+            <span class="sr-only">(current)</span></a></li>               
+         <li class="nav-item">
+            <a class="nav-link" href="/bmain"><h5> 고 객 센 터 </h5></a></li>
+      </ul>
+   </div>
+   <div class="collapse navbar-collapse" id="navbarText">
+   <span class="navbar-text">Welcome to 3TEAM CINEMA</span>
+   </div>
+   <a href="login"><button id="button1">로그인</button></a> | <a href="join"><button id="button2">회원가입</button></a>
+   
+</nav>
+</body>
+ 
+<body>  
+<div class="container">
+<div class="w-75">
+<div class="title"><h3>영화상세</h3></div><br>
+<table style="text-align: center;">
+	<tr>
+		<td rowspan="6">
+		<img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000084/84643/84643_320.jpg" style="width: 250px; height: 350px; margin-left: 20px; margin-right: 100px;"></td>
+	</tr>
+	<tr>
+		<td><strong>크루엘라 (Cruella)</strong> &ensp;12세 이상</td>
+	</tr>
+	<tr>
+		<td>감독: <a href="http://www.cgv.co.kr/movies/persons/?pidx=105610">크레이그 질레스피</a></td>
+	</tr>
+	<tr>
+		<td>배우: <a href="http://www.cgv.co.kr/movies/persons/?pidx=107137">엠마 스톤</a>,&nbsp;
+				 <a href="http://www.cgv.co.kr/movies/persons/?pidx=783">엠마 톰슨</a>,&nbsp;
+				 <a href="http://www.cgv.co.kr/movies/persons/?pidx=32641">마크 스트롱</a></td>
+	</tr>
+	<tr>
+		<td>장르: 드라마, 범죄, 코미디 / 기본: 12세 이상, 134분, 미국</td>
+	</tr>
+	<tr>
+		<td>개봉: 2021.05.26</td>
+	</tr>
+ 
+</table>
+<hr>
+<center>
+<input type = "button"  class="btn-danger "  value = "이전" onclick = "history.back()">	
+</center>
+
+<div class="movie-story">
+<p>처음부터 난 알았어. 내가 특별하단 걸<br>
+그게 불편한 인간들도 있겠지만 모두의 비위를 맞출 수는 없잖아?<br>
+그러다 보니 결국, 학교를 계속 다닐 수가 없었지<br>
+<br>
+우여곡절 런던에 오게 된 나, 에스텔라는 재스퍼와 호레이스를 운명처럼 만났고<br>
+나의 뛰어난 패션 감각을 이용해 완벽한 변장과 빠른 손놀림으로 런던 거리를 싹쓸이했어<br>
+<br>
+도둑질이 지겹게 느껴질 때쯤, 꿈에 그리던 리버티 백화점에 낙하산(?)으로 들어가게 됐어<br>
+거리를 떠돌았지만 패션을 향한 나의 열정만큼은 언제나 진심이었거든<br>
+<br>
+근데 이게 뭐야, 옷에는 손도 못 대보고 하루 종일 바닥 청소라니<br>
+인내심에 한계를 느끼고 있을 때, 런던 패션계를 꽉 쥐고 있는 남작 부인이 나타났어<br>
+천재는 천재를 알아보는 법! 난 남작 부인의 브랜드 디자이너로 들어가게 되었지<br>
+<br>
+꿈을 이룰 것 같았던 순간도 잠시, 세상에 남작 부인이 ‘그런 사람’이었을 줄이야…<br>
+<br>
+그래서 난 내가 누군지 보여주기로 했어<br>
+잘가, 에스텔라<br>
+<br>
+난 이제 크루엘라야!</p>
+</div>
+
+<div class="trailer">
+<div class="title"><h4>트레일러</h4></div>
+	<ul>
+		<li>
+			<a href="https://www.youtube.com/watch?v=yfSMTFzw-Kw" title="유튜브 연결" class="youtube-popup">
+				<span>
+					<img class="trailer1" src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/84643/84643192163_1024.jpg">			
+				</span>
+			</a>
+			<a href="https://www.youtube.com/watch?v=a6YP55MJ0zk" title="유튜브 연결" class="youtube-popup">
+				<span>
+					<img class="trailer2" src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/84643/84643192147_1024.jpg">								
+				</span>
+			</a>
+			<a href="https://www.youtube.com/watch?v=DzKaLXp0eeE" title="유튜브 연결" class="youtube-popup">
+				<span>
+					<img class="trailer3" src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/84643/84643191850_1024.jpg">								
+				</span>
+			</a>
+
+		</li>
+	</ul>
+</div>
+
+<div class="stillcut">
+<div class="title"><h4>스틸컷</h4></div>	 
+	<img class="stillcutimage"src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000084/84643/84643191259_727.jpg">
+	<img class="stillcutimage"src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000084/84643/84643191258_727.jpg">
+	<img class="stillcutimage"src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000084/84643/84643191257_727.jpg">
+	<img class="stillcutimage"src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000084/84643/84643191256_727.jpg">
+	<img class="stillcutimage"src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000084/84643/84643191255_727.jpg">
+	<img class="stillcutimage"src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000084/84643/84643191056_727.jpg">	
+</div>
+
+<div class="charming-point">
+<div class="title"><h4>매력 포인트</h4></div>
+	<div id="charm" class="radar-graph" style="width: 350px; height: 250px;"></div>
+	</div>
+</div>
+
+<div class="emotion-point">
+<div class="title" style="width: 830px;"><h4>감정 포인트</h4></div>
+	<div id="emotion" class="radar-graph" style="width: 350px; height: 250px;"></div>
+	</div>
+<br><br><br><br>
+</div>
+
+<!-- Chart code -->
+<script>
+//매력 포인트 차트
+let chart = AmCharts.makeChart("charm", {
+    "type": "radar",
+    "radius": "35%", //넓이
+
+    "dataProvider": [{
+        "key": "감독연출",
+        "value": 44,
+        "color": "rgb(255,133,179)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "스토리",
+        "value": 51,
+        "color": "rgb(254,196,70)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "영상미",
+        "value": 65,
+        "color": "rgb(142,189,255)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "배우연기",
+        "value": 83,
+        "color": "rgb(100,169,178)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "OST",
+        "value": 48,
+        "color": "rgb(178,103,183)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }],
+    "valueAxes": [{
+        "axisTitleOffset": 10,
+        "minimum": 0,
+        "maximum": 100,
+        "axisAlpha": 0.15,
+        "unitPosition": "right",
+        "gridColor": "#000000",
+        "autoGridCount": false,
+        "gridCount": 5,
+        "labelsEnabled" : false,
+        "tickLength" : 1
+    }],
+    "guides": [
+        {
+            "fillAlpha": 0.10,
+            "value": 0,
+            "toValue": 10,
+            "color": "#060"
+        }
+    ],
+    "balloon": {
+        "enabled": false
+    },
+    "startDuration": 0,
+    "graphs": [{
+        "bullet": "round",
+        "bulletSize": 7,
+        "bulletBorderAlpha": "1",
+        "bulletBorderColor": "rgb(255,255,255)",
+        "bulletBorderThickness": "1",
+        "lineThickness": 1,
+        "lineColor": "#fb8c43",
+        "fillAlphas": 0.1,
+        "valueField": "value",
+        "lineColorField": "color"
+    }],
+    "categoryField": "key",
+    "export": {
+        "enabled": false
+    },
+    "autoResize": false,
+    "color": "rgb(0,0,0)",
+    "fontSize": 12,
+    "fontFamily": "CJONLYONENEW",
+    "tapToActivate": false,
+    "rollOverGraphItem": function () {
+        console.log('rollOverGraphItem')
+
+    }
+});
+
+//감정 포인트 차트
+let chart2 = AmCharts.makeChart("emotion", {
+    "type": "radar",
+    "radius": "35%", //넓이
+
+    "dataProvider": [{
+        "key": "스트레스 해소",
+        "value": 49,
+        "color": "rgb(255,133,179)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "즐거움",
+        "value": 62,
+        "color": "rgb(254,196,70)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "공감",
+        "value": 18,
+        "color": "rgb(142,189,255)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "몰입감",
+        "value": 65,
+        "color": "rgb(100,169,178)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "감동",
+        "value": 20,
+        "color": "rgb(178,103,183)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }],
+    "valueAxes": [{
+        "axisTitleOffset": 10,
+        "minimum": 0,
+        "maximum": 100,
+        "axisAlpha": 0.15,
+        "unitPosition": "right",
+        "gridColor": "#000000",
+        "autoGridCount": false,
+        "gridCount": 5,
+        "labelsEnabled" : false,
+        "tickLength" : 1
+    }],
+    "guides": [
+        {
+            "fillAlpha": 0.10,
+            "value": 0,
+            "toValue": 10,
+            "color": "#060"
+        }
+    ],
+    "balloon": {
+        "enabled": false
+    },
+    "startDuration": 0,
+    "graphs": [{
+        "bullet": "round",
+        "bulletSize": 7,
+        "bulletBorderAlpha": "1",
+        "bulletBorderColor": "rgb(255,255,255)",
+        "bulletBorderThickness": "1",
+        "lineThickness": 1,
+        "lineColor": "#FB4357",
+        "fillAlphas": 0.1,
+        "valueField": "value",
+        "lineColorField": "color"
+    }],
+    "categoryField": "key",
+    "export": {
+        "enabled": false
+    },
+    "autoResize": false,
+    "color": "rgb(0,0,0)",
+    "fontSize": 12,
+    "fontFamily": "CJONLYONENEW",
+    "tapToActivate": false,
+    "rollOverGraphItem": function () {
+        console.log('rollOverGraphItem')
+    }
+});
+</script>
+
+</body>
+</html>

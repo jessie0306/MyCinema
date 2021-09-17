@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Congratulations</title>
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<style type="text/css">
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+div.container { 
+        position:relative;
+        text-align:center;
+}
+</style>
+</head>
+<body>
+<div class="container"><br><br>
+<img src="/static/images/logo333.png" width="320">
+<h1 style="font-weight:bold;">환영합니다!</h1><br>
+<b>{{member_name}}님, 회원가입을 축하합니다!</b><br>
+<b>3TEAM의 새로운 아이디는 <span style="color:green">{{member_id}}</span>입니다.</b>
+<br><br><br>
+<input type="button" id="btnLogin" class="btn-danger" value="로그인" onclick="location.href='/login';">&nbsp;&nbsp;&nbsp;
+<input type="button" id="btnMain" class="btn-outline-danger" value="메인으로 이동" onclick="location.href='/';">  
+</div>
+</body>
+</html>

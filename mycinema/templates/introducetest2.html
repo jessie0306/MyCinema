@@ -1,0 +1,403 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	<script src="/static/js/bootstrap.min.js"></script>     
+	<title>[블랙 위도우]</title>  
+	<script type="text/javascript" src="https://img.cgv.co.kr/R2014/js/amcharts.js"></script>
+	<script type="text/javascript" src="https://img.cgv.co.kr/R2014/js/radar.js"></script>
+
+<style>
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+div.container { 
+   margin-top: 100px;
+   margin-bottom: 100px;
+    position: relative;
+    left: 160px;
+    height: 500px;
+    }
+      
+div.movie-story {
+   margin-top: 50px;
+   position: relative;
+   left: 30px;
+   }
+   
+div.trailer {
+   margin-top: 50px;
+}
+img.trailer1{
+   width: 250px;
+   height: 150px;
+}
+img.trailer2{
+   width: 250px;
+   height: 150px;
+}
+img.trailer3{
+   width: 250px;
+   height: 150px;
+}
+ 
+  div.stillcut {
+   margin-top: 50px;
+   position: relative;
+}
+img.stillcutimage{
+   position: relative;
+   width: 350px;
+   height: 200px;
+   left: 50px;
+}
+div.charming-point {
+   margin-top: 50px;
+}
+
+div.emotion-point {
+   margin-top: 50px;
+}
+
+div.radar-graph {
+   position: relative;
+   left: 200px;
+}
+
+div.title {
+   background-color: #FFF1C1;
+   padding: 10px 10px 10px 25px;
+}
+.btn-danger{
+   text-align: center;
+   position:center;
+   width:30%;
+   margin: auto;
+
+}
+
+#button1{
+   text-align: center;
+   padding: 10px 25px;
+   background-color: black;
+   color: white;
+   border-width: 0px;
+}
+
+#button2{
+   text-align: center;
+   padding: 10px 25px;
+   background-color: black;
+   color: white;
+   border-width: 0px;
+}
+
+</style>
+
+</head>
+<!-- 네비게이션 바 -->
+<body class="pt-5">  <!-- 이미지 경로에 로고이미지 저장해주세요 여기에 -> static/images/logo333.png -->
+<nav id="nav1" class="navbar navbar-expand-lg navbar-dark nav bg-dark fixed-top" style="height: 90px;">
+   <div class="collapse navbar-collapse">
+      <a class="navbar-brand" href="/"><img src="static/images/logo333.png" style= "width: 320"></a>
+      <ul class="nav navbar-nav" style="margin-top: 10px"> 
+         <li class="nav-item  active">
+            <a class="nav-link" href="/movie"><h5> 영  화 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/ticketing"><h5> 예  매 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/mypage"><h5> 마 이 페 이 지 </h5>
+            <span class="sr-only">(current)</span></a></li>               
+         <li class="nav-item">
+            <a class="nav-link" href="/bmain"><h5> 고 객 센 터 </h5></a></li>
+      </ul>
+   </div>
+   <div class="collapse navbar-collapse" id="navbarText">
+   <span class="navbar-text">Welcome to 3TEAM CINEMA</span>
+   </div>
+   <a href="login"><button id="button1">로그인</button></a> | <a href="join"><button id="button2">회원가입</button></a>
+   
+</nav>
+</body>
+ 
+<body>  
+<div class="container">
+<div class="w-75">
+<div class="title"><h3>영화상세</h3></div><br>
+
+<table style="text-align: center;">
+	<tr>
+		<td rowspan="6">
+		<img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000082/82986/82986_320.jpg" style="width: 250px; height: 350px; margin-left: 20px; margin-right: 100px;"></td>
+	</tr>
+	<tr>
+		<td><strong>블랙 위도우</strong> &ensp;12세 이상</td>
+	</tr>
+	<tr>
+		<td>감독: <a href="http://www.cgv.co.kr/movies/persons/?pidx=11053">케이트 쇼트랜드</a></td>
+	</tr>
+	<tr>
+		<td>배우: <a href="http://www.cgv.co.kr/movies/persons/?pidx=5484">스칼렛 요한슨</a>,&nbsp;
+				 <a href="http://www.cgv.co.kr/movies/persons/?pidx=116288">플로렌스 퓨</a>,&nbsp;
+				 <a href="http://www.cgv.co.kr/movies/persons/?pidx=108442">레이첼 와이즈</a></td>
+	</tr>
+	<tr>
+		<td>장르: 액션, 어드벤처, SF / 기본: 12세 이상, 134분, 미국</td>
+	</tr>
+	<tr>
+		<td>개봉: 2021.07.07</td>
+	</tr>
+</table>
+<hr>
+<center>
+<input type = "button"  class="btn-danger "  value = "이전" onclick = "history.back()">	
+</center>
+
+<div class="movie-story">
+<p>"모든 것을 바꾼 그녀의 선택”<br>
+어벤져스의 운명을 바꾼 블랙 위도우, 그녀의 진짜 이야기가 시작된다!<br>
+<br>
+어벤져스의 히어로 블랙 위도우, ‘나타샤 로마노프’ (스칼렛 요한슨)는<br>
+자신의 과거와 연결된 레드룸의 거대한 음모와 실체를 깨닫게 된다.<br>
+<br>
+상대의 능력을 복제하는 빌런 ‘태스크마스터’와 새로운 위도우들의 위협에 맞서<br>
+목숨을 건 반격을 시작하는 ‘나타샤’는 스파이로 활약했던 자신의 과거 뿐 아니라,<br>
+어벤져스가 되기 전 함께했던 동료들을 마주해야만 하는데…<br>
+<br>
+폭발하는 리얼 액션 카타르시스!<br>
+7월, MCU의 새로운 시대를 시작할 첫 액션 블록버스터를 만끽하라!</p>
+
+</div>
+
+<div class="trailer">
+<div class="title"><h4>트레일러</h4></div>
+	<ul>
+		<li>
+			<a href="https://www.youtube.com/watch?v=11nQ2Z8LyII" title="유튜브 연결" class="youtube-popup">
+				<span>				
+					<img class="trailer1" src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/82986/82986193050_1024.jpg">			
+				</span>
+			</a>
+			<a href="https://www.youtube.com/watch?v=rmR7xefwjWs" title="유튜브 연결" class="youtube-popup">
+				<span>				
+					<img class="trailer2" src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/82986/82986192907_1024.jpg">								
+				</span>
+			</a>
+			<a href="https://www.youtube.com/watch?v=b3w2w3gYvkE" title="유튜브 연결" class="youtube-popup">
+				<span>
+					<img class="trailer3" src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/82986/82986192587_1024.jpg">								
+				</span>
+			</a>
+
+		</li>
+	</ul>
+</div>
+
+<div class="stillcut">
+<div class="title"><h4>스틸컷</h4></div>	 
+	<img class="stillcutimage"src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000082/82986/82986192647_727.jpg">
+	<img class="stillcutimage"src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000082/82986/82986192366_727.jpg">
+	<img class="stillcutimage"src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000082/82986/82986192154_727.jpg">
+	<img class="stillcutimage"src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000082/82986/82986192644_727.jpg">
+
+</div>
+
+<div class="charming-point">
+<div class="title"><h4>매력 포인트</h4></div>
+	<div id="charm" class="radar-graph" style="width: 350px; height: 250px;"></div>
+	</div>
+</div>
+
+<div class="emotion-point">
+<div class="title" style="width: 830px;"><h4>감정 포인트</h4></div>
+	<div id="emotion" class="radar-graph" style="width: 350px; height: 250px;"></div>
+	</div>
+<br><br><br><br>
+</div>
+
+<!-- Chart code -->
+<script>
+//매력 포인트 차트
+let chart = AmCharts.makeChart("charm", {
+    "type": "radar",
+    "radius": "35%", //넓이
+
+    "dataProvider": [{
+        "key": "감독연출",
+        "value": 42,
+        "color": "rgb(255,133,179)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "스토리",
+        "value": 47,
+        "color": "rgb(254,196,70)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "영상미",
+        "value": 60,
+        "color": "rgb(142,189,255)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "배우연기",
+        "value": 79,
+        "color": "rgb(100,169,178)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "OST",
+        "value": 28,
+        "color": "rgb(178,103,183)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }],
+    "valueAxes": [{
+        "axisTitleOffset": 10,
+        "minimum": 0,
+        "maximum": 100,
+        "axisAlpha": 0.15,
+        "unitPosition": "right",
+        "gridColor": "#000000",
+        "autoGridCount": false,
+        "gridCount": 5,
+        "labelsEnabled" : false,
+        "tickLength" : 1
+    }],
+    "guides": [
+        {
+            "fillAlpha": 0.10,
+            "value": 0,
+            "toValue": 10,
+            "color": "#060"
+        }
+    ],
+    "balloon": {
+        "enabled": false
+    },
+    "startDuration": 0,
+    "graphs": [{
+        "bullet": "round",
+        "bulletSize": 7,
+        "bulletBorderAlpha": "1",
+        "bulletBorderColor": "rgb(255,255,255)",
+        "bulletBorderThickness": "1",
+        "lineThickness": 1,
+        "lineColor": "#fb8c43",
+        "fillAlphas": 0.1,
+        "valueField": "value",
+        "lineColorField": "color"
+    }],
+    "categoryField": "key",
+    "export": {
+        "enabled": false
+    },
+    "autoResize": false,
+    "color": "rgb(0,0,0)",
+    "fontSize": 12,
+    "fontFamily": "CJONLYONENEW",
+    "tapToActivate": false,
+    "rollOverGraphItem": function () {
+        console.log('rollOverGraphItem')
+
+    }
+});
+
+//감정 포인트 차트
+let chart2 = AmCharts.makeChart("emotion", {
+    "type": "radar",
+    "radius": "35%", //넓이
+
+    "dataProvider": [{
+        "key": "스트레스 해소",
+        "value": 61,
+        "color": "rgb(255,133,179)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "즐거움",
+        "value": 42,
+        "color": "rgb(254,196,70)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "긴장감",
+        "value": 40,
+        "color": "rgb(142,189,255)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "몰입감",
+        "value": 62,
+        "color": "rgb(100,169,178)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }, {
+        "key": "감동",
+        "value": 39,
+        "color": "rgb(178,103,183)",
+        "rollOverColor" : "rgb(0,0,0)",
+        "selectedColor" : "rgb(0,0,0)",
+    }],
+    "valueAxes": [{
+        "axisTitleOffset": 10,
+        "minimum": 0,
+        "maximum": 100,
+        "axisAlpha": 0.15,
+        "unitPosition": "right",
+        "gridColor": "#000000",
+        "autoGridCount": false,
+        "gridCount": 5,
+        "labelsEnabled" : false,
+        "tickLength" : 1
+    }],
+    "guides": [
+        {
+            "fillAlpha": 0.10,
+            "value": 0,
+            "toValue": 10,
+            "color": "#060"
+        }
+    ],
+    "balloon": {
+        "enabled": false
+    },
+    "startDuration": 0,
+    "graphs": [{
+        "bullet": "round",
+        "bulletSize": 7,
+        "bulletBorderAlpha": "1",
+        "bulletBorderColor": "rgb(255,255,255)",
+        "bulletBorderThickness": "1",
+        "lineThickness": 1,
+        "lineColor": "#FB4357",
+        "fillAlphas": 0.1,
+        "valueField": "value",
+        "lineColorField": "color"
+    }],
+    "categoryField": "key",
+    "export": {
+        "enabled": false
+    },
+    "autoResize": false,
+    "color": "rgb(0,0,0)",
+    "fontSize": 12,
+    "fontFamily": "CJONLYONENEW",
+    "tapToActivate": false,
+    "rollOverGraphItem": function () {
+        console.log('rollOverGraphItem')
+    }
+});
+</script>
+
+</body>
+</html>

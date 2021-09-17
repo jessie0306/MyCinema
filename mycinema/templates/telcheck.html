@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>휴대폰번호 중복체크 팝업</title>
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<style type="text/css">
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.container {
+	position:relative;
+	top:30px;
+    text-align:center;
+}
+</style>
+
+<script type="text/javascript">
+function send(msg){
+	if(msg == "사용불가"){
+		opener.document.getElementById('newtel').value = '';
+		opener.document.getElementById('newtel').focus();
+	}else{
+		opener.document.getElementById('yy').focus();
+	}
+	opener.document.getElementById('usetel').innerText = msg;  // '사용불가' or '사용가능'이 넘어가 빨간색으로 표시된다
+	window.close();
+}
+</script>
+
+</head>
+<body class="container">
+{% if wanted_tel == True %}
+	<p>이미 등록된 전화번호 입니다</p>
+	<p>회원가입 여부를 확인해주세요</p>
+	<hr>
+	<input type="button" class="btn-outline-danger" onclick="send('사용불가')" value="확인">
+	
+{% else %}
+	<p>등록 가능한 전화번호 입니다</p>
+	<br><hr>
+	<input type="button" class="btn-outline-danger" onclick="send('사용가능')" value="확인">
+	
+{% endif %}
+</body>
+</html>

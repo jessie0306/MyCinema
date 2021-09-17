@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>MyPage</title>
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="/static/js/jquery-3.6.0.min"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+function WlFunc(){
+	frm.submit();
+};
+
+</script>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+div.container { 
+    position: relative;
+    left: 70px;
+    height: 500px;
+}
+
+div.chart {
+	position: relative;
+	left: 100px;
+	}
+	
+</style>
+</head>
+
+<!-- 네비게이션 바 -->
+<body class="pt-5">
+<nav id="nav1" class="navbar navbar-expand-lg navbar-dark nav bg-dark fixed-top" style="height: 90px;">
+	<div class="collapse navbar-collapse">
+		<a class="navbar-brand" href="/"><img src="/static/images/logo333.png" width="320"></a>
+		<span> &emsp;&emsp;&emsp;&emsp;&emsp; </span>
+		<ul class="nav navbar-nav" style="margin-top: 10px"> 
+			<li class="nav-item">
+				<a class="nav-link" href="movie"><h5> 영  화 </h5></a></li>
+			<li class="nav-item">
+				<a class="nav-link" href="/ticketing"><h5> 예  매 </h5></a></li>
+			<li class="nav-item active">
+				<a class="nav-link" href="/mypage"><h5> 마 이 페 이 지 </h5>
+				<span class="sr-only">(current)</span></a></li>					
+			<li class="nav-item">
+				<a class="nav-link" href="/bmain"><h5> 고 객 센 터 </h5></a></li>
+		</ul>
+	</div>
+	<div class="collapse navbar-collapse">
+	<ul class="nav navbar-nav" style="margin-top: 10px">
+		<li class="nav-item"><a class="nav-link" href="logout"><h5> 로그아웃 </h5></a></li>
+	</ul>
+	</div>
+</nav>
+</body>
+<br><br><br><br>
+
+
+<body>
+<div class="container">
+
+<!-- 이름 카드 -->
+<div class="card text-center" style="width: 50rem; left: 100px;">
+  <div class="card-body">
+    <h3 class="card-title">{{name}}님 안녕하세요.</h3>
+    <p class="card-text"></p>
+    <p class="card-text">Last updated 3 mins ago</p>
+  </div>
+</div>
+<br><br>
+
+
+<!-- 예매내역 -->
+<div class="container">
+<div class="w-75">
+<h3>예매내역</h3><br>
+{% if willwatch %}
+{% for ww in willwatch %}
+<table class="table table-hover" style="text-align: center;">
+	<tr>
+		<td rowspan="7">
+		<img style="width: 200px; height: 250px" src="/static/images/{{ww.movie_id}}.png"></td>
+	</tr>
+	<tr>
+		<td>{{ww.ticket_id}}</td>
+	</tr>
+	<tr>
+		<td>{{ww.movie_name}}</td>
+	</tr>
+	<tr>
+		<td>{{ww.ticket_date}}</td>
+	</tr>
+	<tr>
+		<td>{{ww.cine_name}}</td>
+	</tr>
+	<tr>
+		<td>{{ww.seat}}</td>
+	</tr>
+	<tr>
+		<td>
+		<button style="width: 100px; height: 40px;" type="button" class="btn btn-danger" onclick="location.href='cancelCheck';">예매취소</button>
+		</td>
+	</tr>
+</table>
+{% endfor %}
+{% else %}
+<div style="text-align: center;">예매내역이 없습니다.</div>
+{% endif %}
+</div>
+<div>
+</div>
+<br><br>
+
+
+<!-- 내가 본 영화 리스트 -->
+<div class="w-75"><h3>내가 본 영화</h3><br>
+<table class="table table-hover" style="text-align: center;">
+	<thead class="thead-dark">
+	<tr>
+		<th>예매번호</th><th>영화제목</th><th>관람일시</th><th>관람장소</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% if watched %}
+	{% for w in watched %}
+	<tr>
+		<td>{{w.ticket_id}}</td>
+		<td>{{w.movie_name}}</td>
+		<td>{{w.ticket_date}}</td>
+		<td>{{w.cine_name}}</td>
+	</tr>
+	{% endfor %}
+	<tr>
+		<td colspan="4">
+		<form action="watchList" method="post" name="frm">{% csrf_token %}
+			<button id="btnWl" class="btn btn-danger" onclick="wlFunc();">더보기</button>
+		</form>
+		
+		</td>
+	</tr>
+	{% else %}
+	<tr>
+		<td colspan="4">예매이력이 없습니다.</td>
+	</tr>
+	{% endif %}
+</table>
+
+</div>
+<br><br>
+
+
+<!-- 선호장르 pie차트 -->
+<div class="w-75"><h3>선호장르</h3><br>
+<div class="chart" style="left: 200px;">
+    <canvas id="genreChart" style="width:380px; height:280px"></canvas>
+</div>
+<script>
+// 선호장르 차트
+// JSON 데이터 가져오기와서 저장
+let genrejson = JSON.parse("{{ genre_json|escapejs }}");
+let arg = document.getElementById("genreChart").getContext('2d');
+
+//arg를 첫번째 인수로 넘겨주고, 두번째 인수로 그림을 그릴때 필요한 요소들을 모두 넘겨준다. 
+let genreChart = new Chart(arg, {
+        type: 'pie',
+        data: genrejson,
+        options: {
+            responsive: false,
+            maintainAspectRatio: true,
+            legend: { 
+            	position: 'right', 
+	            labels: {
+                    padding: 20
+                }}
+        }
+});
+</script>
+</div>
+<br><br>
+
+
+<!-- 선호배우 bar차트 -->
+<div class="w-75"><h3>선호배우</h3><br>
+<div class="chart" style="width: 550px">
+    <canvas id="actorChart"></canvas>
+</div>
+<script>
+//선호배우 차트
+// JSON 데이터 가져오기와서 저장
+let actorjson = JSON.parse("{{ actor_json|escapejs }}");
+let arg2 = document.getElementById("actorChart").getContext('2d');
+
+//arg를 첫번째 인수로 넘겨주고, 두번째 인수로 그림을 그릴때 필요한 요소들을 모두 넘겨준다. 
+let actorChart = new Chart(arg2, {
+    type: 'bar',
+    data: actorjson,
+    options: {
+        maintainAspectRatio: true, // false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+</div>
+<br><br><br>
+
+
+<!-- 영화추천 -->
+<div class="w-75"><h3>{{name}}님이 좋아할 영화</h3><br>
+<table class="table table-hover">
+	<tr>
+	{% if recommend %}
+	{% for r in recommend %}
+	<td>
+		<td>
+		<img style="width: 120px; height: 180px" src="/static/images/{{r.msrc}}">
+		</td>
+	</td>
+	{% endfor %}
+	{% endif %}
+	</tr>
+	<tr>
+	{% if recommend %}
+	{% for r in recommend %}
+	<td>
+		<td>
+		<button style="width: 120px; height: 50px" type="button" class="btn btn-danger" onclick="location.href='/ticketing';">바로예매</button>
+		</td>
+	</td>
+	{% endfor %}
+	{% endif %}	
+	</tr>
+	
+</table>
+</div>
+<br><br>
+
+</div>
+</div>
+</body>
+</html>

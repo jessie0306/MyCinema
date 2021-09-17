@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ID 중복체크 팝업</title>
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<style type="text/css">
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.container {
+	position:relative;
+	top:30px;
+    text-align:center;
+}
+</style>
+
+<script type="text/javascript">
+function send(msg){
+	if(msg == "사용불가"){
+		opener.document.getElementById('newid').value = '';
+		opener.document.getElementById('newid').focus();
+	}else{
+		opener.document.getElementById('newpwd').focus();
+	}
+	opener.document.getElementById('useid').innerText = msg;  // '사용불가' or '사용가능'이 넘어가 빨간색으로 표시된다
+	window.close();
+}
+</script>
+
+</head>
+<body class="container">
+{% if wanted_id == True %}
+	<p>이미 사용 중인 아이디 입니다</p>
+	<br><hr>
+	<input type="button" class="btn-outline-danger" onclick="send('사용불가')" value="확인">
+
+{% else %}
+	<p>사용 가능한 아이디 입니다</p>
+	<br><hr>
+	<input type="button" class="btn-outline-danger" onclick="send('사용가능')" value="확인">
+
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+ 
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+
+<script src="/static/js/jquery-3.6.0.min"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<style type="text/css">
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff');
+    *{
+    font-family: 'GongGothicLight';
+    }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+#login{
+text-align: right;
+color : white;
+}
+
+#button{
+text-align: center;
+padding: 10px 25px;
+background-color: red;
+color: white;
+border-width: 0px;
+}
+
+#button2{
+text-align: center;
+padding: 10px 25px;
+background-color: black;
+color: white;
+border-width: 0px;
+}
+#button3{
+text-align: center;
+padding: 10px 25px;
+background-color: black;
+color: white;
+border-width: 0px;
+}
+
+#button{
+text-align: center;
+padding: 10px 25px;
+background-color: red;
+color: white;
+border-width: 0px;
+}
+
+#button2{
+text-align: center;
+padding: 10px 25px;
+background-color: black;
+color: white;
+border-width: 0px;
+}
+
+ul{
+            list-style: none;
+ 
+                    }
+.linemap-wrap {
+    width: 100%;
+    background-color: #f1f0e5;
+    border-bottom: 1px solid #cacac0;
+}
+
+.bg-dark {
+    background-color: #343a40!important;
+}
+
+.sidebar-sticky {
+    position: sticky;
+    top: 48px;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+strong {
+    font-weight: 500;
+}
+.talk_inquiry {
+    background: #ede9dd url(http://img.cgv.co.kr/R2014/images/sub/customer/ico_search.png) center 50px scroll no-repeat;
+    background-size: 50px;
+}
+
+.nav-link{
+color: #ffffff80;
+}
+</style>
+<title>mmr_list</title>
+</head>
+<body class="pt-5">
+<!-- 광고 뺌 -->
+<nav id="nav1" class="navbar navbar-expand-lg navbar-dark nav bg-dark fixed-top" style="height: 90px;">
+   <div class="collapse navbar-collapse">
+      <a class="navbar-brand" href="/main"><img src="/static/images/logo333.png" width="320"></a>
+      <ul class="nav navbar-nav"> 
+         <li class="nav-item">
+            <a class="nav-link" href="/movie"><h5> 영  화 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/ticketing"><h5> 예  매 </h5></a></li>
+         <li class="nav-item">
+            <a class="nav-link" href="/mypage"><h5> 마 이 페 이 지 </h5>
+            <span class="sr-only">(current)</span></a></li>               
+         <li class="nav-item active">
+            <a class="nav-link" href="/bmain"><h5> 고 객 센 터 </h5></a></li>
+      </ul>
+   </div>
+   <div class="collapse navbar-collapse" id="navbarText">
+   <span class="navbar-text">Welcome to 3TEAM CINEMA</span>
+   </div>
+   <div id="login">{{member_id}}님 환영합니다  <a href="logout"><button id="button3">logout</button></a>  <a href="join"><button id="button2">회원가입</button></a>
+</nav>
+</body>
+<body onload="rotate()" id="body1">
+<div class="bg-dark" ><br><br></div>
+<div class="bg-dark" id="adReduce">                    
+      <iframe src="//ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/sub@TopBar_EX" width="100%" height="80" title="" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" name="TopBanner" id="TopBanner"></iframe>
+</div>   
+ <div id="ctl00_navigation_line" class="linemap-wrap">
+            <div class="sect-linemap">
+                <div class="sect-bcrumb">
+                    <ul >
+                        <li >
+                        <a href="/">
+                        	<img alt="home" src="https://img.cgv.co.kr/R2014/images/common/btn/btn_home.png" />
+                        </a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+<!-- content 부분 -->
+<div class = "content">
+
+<div class="container-fluid" >
+   <div class="row align-items-center " >
+   
+   <div class="col-sm-2">
+     <nav class="navbar navbar-expand-lg navbar-dark nav bg-dark ">
+       <div class="collapse navbar-collapse ">
+       <div class="sidebar-sticky container-fluid">
+         <ul class="nav navbar-nav flex-column">
+           <li class="nav-item">
+             <a class="nav-link" href="/bmain">
+               <h5>고객센터 메인</h5>
+             </a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link" href="/Voc">
+               <h5>고객의 소리</h5>
+             </a>
+           </li>
+           <li class="nav-item active">
+             <a class="nav-link" href="/MMR">
+               <h5>내 영화 추천</h5>
+             </a>
+           </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+   
+   
+   </div><br><br><br>
+   <hr>
+ <div class="col-sm-10">
+		<h2>내 영화 추천</h2>
+		<a href = "/MMRinsert">글쓰기</a><!-- 글씨기 추가  -->
+		<table style = "width: 90%" class = "table">
+			<tr>
+				<th>번호</th><th>장르</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
+			</tr>
+
+			{% if data %}		<!-- 데이터가 있다면 포문실행 -->
+			{% for d in data %}
+			<tr>
+				<td>{{d.post_id}}</td>
+				<!-- 아이디(d.id) 와 페이지 번호(data.number)가저간다  페이지는 수정하고 돌아오기 편하게 -->
+				<td>{{d.like_genre}}</td>
+				<td >
+				<!-- 들여쓰기 -->
+					{% with ''|center:d.nested as range  %}
+						<!-- nested만큰 공백문자를 준다 -->
+						{% for _ in range %}&nbsp;&nbsp;{% endfor %}
+					
+					{% endwith %}											<!-- data.number 는 현재페이지 -->
+					<a href = "/MMRcontent?post_id={{d.post_id}}&page={{data.number}}">{{d.title}}</a>
+				</td>
+				<td>{{d.member_id}}</td>
+				<td>{{d.bdate.year}}.{{d.bdate.month}}.{{d.bdate.day}}</td>
+				<td>{{d.readcnt}}</td>
+			</tr>
+			{% endfor %}
+			<tr><!-- page처리 -->
+				<td colspan ="10" style = "text-align: center;" >
+				<center>
+					<nav aria-label="Page navigation example" >
+					<ul class="pagination col-md-4 .offset-md-3">
+					{% if data.has_previous %}<!-- 이전이 있다면-->
+						<li class="page-item"><a class="page-link"  href = "/MMRsearch2?page={{data.previous_page_number}}&s_value={{s_value}}&s_type={{s_type}}">&laquo;이전</a></li>
+					{% endif %}
+					{% if data.has_next%}<!-- 다음이 있다면-->
+						<li class="page-item"><a class="page-link"  href = "/MMRsearch2?page={{data.next_page_number}}&s_value={{s_value}}&s_type={{s_type}}">다음&raquo;</a></li>
+					{% endif %}
+					&nbsp;&nbsp;(페이지&nbsp;{{data.number}} / {{data.paginator.num_pages}}&nbsp;)
+					</ul>
+					</nav>
+					</center>
+					
+				</td>
+			</tr>
+			{% else %}		<!-- 데이터가 없다면 글이없어요 출력-->
+			<tr>
+				<td colspan = "10" style = "text-align: center;">글이 없어요</td>
+			</tr>
+			{% endif %}
+			
+			<tr>
+				<td  colspan = "10" style = "text-align: center; ">
+				<br>
+				<form action ="/MMRsearch" method = "post">{% csrf_token %}
+							검색 : 
+					<select name = "s_type" >
+						<option value = "title" selected = "selected"> 글제목 </option>
+						<option value = "member_id">작성자</option>
+						<option value = "like_genre">장르</option>
+					</select>
+						<input type = "text" name = "s_value">
+					<input class="btn btn-secondary"  type = "submit" value = "검색하기">
+				</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+</body>
+
+</html>
